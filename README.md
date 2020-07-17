@@ -1,6 +1,6 @@
 # hapi-kube
 
-## Build Image
+### Build Image
 ```bash
 $ docker build -t muhbayu/hapi-kube:latest .
 ```
@@ -10,17 +10,17 @@ $ docker build -t muhbayu/hapi-kube:latest .
 $ docker push muhbayu/hapi-kube:latest
 ```
 
-## Apply Kube
+### Apply Kube
 ```bash
 $ kubectl apply -f ./kube-template/hapi-app.yaml
 ```
 
-## Get All (pods,deployments,services,replicasets)
+### Get All (pods,deployments,services,replicasets)
 ```bash
 $ kubectl get all
 ```
 
-## Testing internal kubernetes cluster to your localhost
+### Testing internal kubernetes cluster to your localhost
 ```bash
 $ kubectl port-forward service/hapi-kube 3000:3000
 ```
