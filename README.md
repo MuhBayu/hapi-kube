@@ -5,7 +5,7 @@
 $ docker build -t muhbayu/hapi-kube:latest .
 ```
 
-## Push Image
+### Push Image
 ```bash
 $ docker push muhbayu/hapi-kube:latest
 ```
