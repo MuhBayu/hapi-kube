@@ -15,7 +15,7 @@ kind: Deployment
 metadata:
   name: hapi-kube
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: hapi-kube
