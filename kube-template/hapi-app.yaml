@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hapi-kube
+spec:
+  type: NodePort
+  ports:
+    - port: 3000
+      name: http
+  selector:
+    app: hapi-kube
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hapi-kube
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hapi-kube
+  template:
+    metadata:
+      labels:
+        app: hapi-kube
+    spec:
+      containers:
+        - name: hapi-kube
+          image: muhbayu/hapi-kube:latest
+          ports:
+            - containerPort: 3000

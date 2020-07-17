@@ -1,0 +1,14 @@
+{
+  "name": "hapi-kube",
+  "version": "1.0.0",
+  "description": "Simple Hapijs App with Kubernetes",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "MuhBayu",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "^19.1.1"
+  }
+}
