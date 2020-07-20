@@ -1,31 +1,53 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: hapi-kube
-spec:
-  type: NodePort
-  ports:
-    - port: 3000
-      name: http
-  selector:
-    app: hapi-kube
----
 apiVersion: apps/v1
-kind: Deployment
+kind: ReplicaSet
 metadata:
   name: hapi-kube
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: hapi-kube
+      name: hapi-kube
   template:
     metadata:
+      name: hapi-kube
       labels:
-        app: hapi-kube
+        name: hapi-kube
     spec:
       containers:
         - name: hapi-kube
           image: muhbayu/hapi-kube:latest
           ports:
             - containerPort: 3000
+  
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: hapi-kube-service
+spec:
+  selector:
+    name: hapi-kube
+  ports:
+    - port: 3000
+      targetPort: 3000
+
+---
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: gateway-ingress
+  labels:
+    name: gateway-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: hapi-kube-service.default.svc.local
+      http:
+        paths:
+          - path: /api/v1/
+            backend:
+              serviceName: hapi-kube-service
+              servicePort: 3000
